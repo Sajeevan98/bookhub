@@ -1,0 +1,6 @@
+ALTER TABLE books
+ADD COLUMN description TEXT;
+
+--ALTER TABLE books
+--ADD COLUMN active BOOLEAN NOT NULL DEFAULT TRUE;
+

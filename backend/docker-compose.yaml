@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: bookhub-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-bookhub-db
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: ngrok
+    command: http host.docker.internal:8081
+    environment:
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
+    ports:
+      - "4040:4040"
+
+volumes:
+  postgres_data:
+  pgadmin_data:

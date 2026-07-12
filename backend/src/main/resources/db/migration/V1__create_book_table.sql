@@ -1,0 +1,24 @@
+CREATE TABLE IF NOT EXISTS books (
+
+    id BIGSERIAL PRIMARY KEY,
+
+    title VARCHAR(255) NOT NULL,
+
+    author VARCHAR(150) NOT NULL,
+
+    isbn VARCHAR(20) NOT NULL UNIQUE,
+
+    price NUMERIC(10,2) NOT NULL,
+
+    stock INTEGER NOT NULL DEFAULT 0,
+
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+   CONSTRAINT chk_books_price
+        CHECK (price >= 0),
+
+   CONSTRAINT chk_books_stock
+        CHECK (stock >= 0)
+);
