@@ -1,0 +1,20 @@
+CREATE TABLE orders (
+
+    id BIGSERIAL PRIMARY KEY,
+
+    uuid UUID NOT NULL UNIQUE,
+
+    order_number VARCHAR(50) NOT NULL UNIQUE,
+
+    customer_name VARCHAR(150) NOT NULL,
+
+    customer_email VARCHAR(150) NOT NULL,
+
+    total_amount NUMERIC(10,2) NOT NULL,
+
+    status VARCHAR(30) NOT NULL,
+
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
